@@ -1,0 +1,44 @@
+{
+  "name": "remix-streaming",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production sst build --stage prod --profile predictive_insights",
+    "console": "sst console --stage matt --profile predictive_insights",
+    "console-prod": "sst console --stage prod --profile predictive_insights",
+    "deploy": "cross-env NODE_ENV=development sst deploy --stage matt --profile predictive_insights",
+    "deploy-prod": "cross-env NODE_ENV=production sst deploy --stage prod --profile predictive_insights",
+    "dev": "cross-env NODE_ENV=development sst dev --stage matt --profile predictive_insights",
+    "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
+    "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
+    "my-remix-app": "pnpm --filter my-remix-app dev",
+    "prettier": "pnpm lint:prettier --write",
+    "remove": "cross-env NODE_ENV=development sst remove --stage matt --profile predictive_insights",
+    "remove-prod": "cross-env NODE_ENV=production sst remove --stage prod --profile predictive_insights",
+    "set-node-v": "pnpm env use --global 18",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.0",
+    "aws-cdk-lib": "2.84.0",
+    "constructs": "10.1.156",
+    "cross-env": "^7.0.3",
+    "sst": "2.22.9",
+    "typescript": "^5.1.6"
+  },
+  "packageManager": "pnpm@8.6.9",
+  "engines": {
+    "node": "18.x",
+    "pnpm": "8.x"
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/my-remix-app/*"
+  ],
+  "pnpm": {
+    "patchedDependencies": {
+      "sst@2.22.9": "patches/sst@2.22.9.patch"
+    }
+  }
+}
